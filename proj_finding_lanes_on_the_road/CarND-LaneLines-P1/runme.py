@@ -15,7 +15,7 @@ def grayscale(img):
 def canny(img, low_threshold, high_threshold):
 	return cv2.Canny(img, low_threshold, high_threshold)
 
-def faussion_blur(img, kernel_size):
+def gaussion_blur(img, kernel_size):
 	return cv2.GaussianBlur(img, (kernel_size, kernel_size), 0)
 
 
@@ -45,4 +45,3 @@ def hough_lines(img, rho, theta, threshold, min_line_len, max_line_gap):
 
 def weighted_img(img, initial_img, w1 = 0.8, w2 = 1.0, b = 0.0):
 	return cv2.addWeighted(initial_img,w1,img, w2, b)
-	
