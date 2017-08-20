@@ -55,60 +55,100 @@ the label is **31 Wild animals crossing**
 the label is **31 Wild animals crossing**
 
 ![training sample #908](https://github.com/easyfly007/autodrive_projects/blob/master/proj_traffic_sign_classifier/examples/train908.png)
-the label is **36, Go straight or right **
+the label is ** 36, Go staight or right**
 
 we can see like the training sample #233 and #667, they show different traffic sign, but one is brighter and one is darker.
 
-### Design and Test a Model Architecture
+----
 
-As a first step, I decided to convert the images to grayscale because the classical LeNet use gray scale, and it will significantly reduce the calculation.
+### 3. data pre-processing
+there are something to do before we build our network and load the data into our network.
 
-Here is an example of a traffic sign image before and after grayscaling.
+**transfer from RGB color image to gray scale image**
+    generally I will copy the LeNet structure and it use gray scale image as input
+    just by simply use the mean of the RGB 
+    
+**input normalization**
+    divid the inputt by 255, then the scale will be 0.0-> 1.0 
+    Here is an example of a traffic sign image before and after grayscaling.
 
-![alt text][image2]
+![training sample #234, RGB](https://github.com/easyfly007/autodrive_projects/blob/master/proj_traffic_sign_classifier/examples/train234.png)
+    RGB image for training sample #234
+    
+![training sample #234, gray](https://github.com/easyfly007/autodrive_projects/blob/master/proj_traffic_sign_classifier/examples/train234_gray.png)
+    gray image for training sample #234
 
-As a last step, I normalized the image data because normalization will in some degree avoid gradient vanish problem.
 
+**data augment (TODO)**
+actually I didn't do any augment to expand the dataset.but a reasonable augment technique would be:
+1. rotate the image for a small angle (<5 degree)
+2. add random noise
+3. cut the edge like this techniques
 
+----
+
+### 4. nentwork
 My final model consisted of the following layers:
 
-| Layer         		|     Description	        					| 
+| Layer                 |     Description                               | 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x1 gray scale image   							| 
-| Convolution 5x5     	| 1x1 stride, valid padding, outputs 28x28x6 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 14x14x6 				    |
-| | |
-| Convolution 5x5     	| 1x1 stride, valid padding, outputs 10x10x16 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 5x5x16 				    |
-| | |
-| Fully connected		|  outputs 120.        						   |
-| Fully connected		|  outputs 84.        						   |
-| Fully connected		|  outputs 43.        						   |
-| Softmax				|          									|
+| Input                 | 32x32x1 gray scale image                              | 
+| Convolution 5x5       | 1x1 stride, valid padding, outputs 28x28x6    |
+| RELU                  |                                               |
+| Max pooling           | 2x2 stride,  outputs 14x14x6                  |
+| Convolution 5x5       | 1x1 stride, valid padding, outputs 10x10x16   |
+| RELU                  |                                               |
+| Max pooling           | 2x2 stride,  outputs 5x5x16                   |
+| Fully connected       |  outputs 120.                                |
+| drop out      |  0.75 keep_prob for training, 1.0 for evaluation     |
+| Fully connected       |  outputs 120.                                |
+| drop out      |  0.75 keep_prob for training, 1.0 for evaluation     |
+| Fully connected       |  outputs 43.                                 |
+| Softmax               |                                           |
 
- 
+this structure is copied from the classic LeNet structure (while I added drop out in the last 2 FC layers), for more detail, see below link:
+http://yann.lecun.com/exdb/lenet/
 
-
-#### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
-
-To train the model, I set super parameters as below:
-batch_size: 128
-learning_rate: 0.001
-and before reloading the data for each epoch, use shuffle to randomize the data.
+**computer graph illustration (TODO)
+using tensorboard
 
 
+#### 5. hyper parameters setting
+the hyper parameters we selected:
+**epoch**
+    even though the larger epoch we select, the higher accuracy (lower loss value) we will got in the training set. but in my testing, a large will induce over fitting, e.g., the accuracy becomes lower in the validation set as we train more and more.
+it's because in the large epoch iterations, it's learning the the pecific features from the training set, not the general features. so need to do an early stop here.
 
+in my testing, I select near 15 epochs and stops it there.
+
+**learning rate**
+learning rate is not a big problem, if you are not sure which one to use, start from the stardard 0.001, and a samll one will always induce a better result except need larger epoch numbersd.
+
+in my case, I select 0.001.
+
+**batch size**
+it's based on your machine memory size.
+if accept, select a larger one.
+I selet 128.
+it's OK in my PC, the only problem is that when in the fine tuning step, after several try, the memory depleted and I will need to restart the kernel to clean on the memory.
+
+do a random shuffle before each epoch.
+
+**optimizer**
+I select the AdamOptimizer, rather than GradientDescentOptimizer,
+as for GradientDescentOptimizere, it may stuck on the local minimum point there.
+
+### 5. the final solution 
 My final model results were:
-* validation set accuracy of  0.658
+
+* training set accuracy of 0.658
+* validation set accuracy of 0.619
 * test set accuracy of 0.619
 
+(TODO) accuracy graph plot togetherx
 
-
-
-
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
+### 6. Visualizing the Neural Network
+(See Step 4 of the Ipython notebook for more details)
+**. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?**
 
 
