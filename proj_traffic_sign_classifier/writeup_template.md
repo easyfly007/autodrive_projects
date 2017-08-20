@@ -1,9 +1,10 @@
 # **Traffic Sign Recognition** 
+----
+### 0. summary
 
-
----
 
 **Build a Traffic Sign Recognition Project**
+in this project, we will build a deep neural network to do traffic sign classification.
 
 The goals / steps of this project are the following:
 * Load the data set (see below for links to the project data set)
@@ -13,34 +14,24 @@ The goals / steps of this project are the following:
 * Analyze the softmax probabilities of the new images
 * Summarize the results with a written report
 
+**codes**
+the rew project material can be found at:
+ [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+ my work start from this materials there.
 
-[//]: # (Image References)
+and my project codes can be found at:
+ [project code](https://github.com/easyfly007/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+----
 
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+### 1. Data Set Summary & Exploration
 
----
-### Writeup / README
+In this project, I use a traffic signs data set from German Traffic Sign Dataset. 
 
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
-
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
-
-### Data Set Summary & Exploration
+you can download it from below link as I use, [download ](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/5898cd6f_traffic-signs-data/traffic-signs-data.zip) . This is a pickled dataset in which we've already resized the images to 32x32.
 
 
-
-I used the python list operation to calculate summary statistics of the traffic
-signs data set:
+I used the python list operation to calculate summary statistics of the traffic signs data set:
 
 * The size of training set is 34799
 * The size of the validation set is 4410
@@ -48,12 +39,25 @@ signs data set:
 * The shape of a traffic sign image is [32,32,3]
 * The number of unique classes/labels in the data set is 43
 
-#### 2. Include an exploratory visualization of the dataset.
+----
+#### 2.  exploratory visualization of the dataset.
+below is a quick peak of the samples, to look at what they look like:
+**sample 1**
+this is from the # 0 train sample:
+![training sample #0](https://github.com/easyfly007/autodrive_projects/blob/master/proj_traffic_sign_classifier/examples/train0.png)
+the label is **41 'End of no passing'**
 
-Here is an exploratory visualization of the data set. 
-i randomly select the 234 train data:
-![train img]: ./examples/train234.png "Traffic Sign 5"
-![alt text][image1]
+
+![training sample #233](https://github.com/easyfly007/autodrive_projects/blob/master/proj_traffic_sign_classifier/examples/train233.png)
+the label is **31 Wild animals crossing**
+
+![training sample #667](https://github.com/easyfly007/autodrive_projects/blob/master/proj_traffic_sign_classifier/examples/train667.png)
+the label is **31 Wild animals crossing**
+
+![training sample #908](https://github.com/easyfly007/autodrive_projects/blob/master/proj_traffic_sign_classifier/examples/train908.png)
+the label is **36, Go straight or right **
+
+we can see like the training sample #233 and #667, they show different traffic sign, but one is brighter and one is darker.
 
 ### Design and Test a Model Architecture
 
