@@ -1,17 +1,17 @@
-import scv
+import csv
 import keras
 import cv2
 import numpy as np 
 
 lines = []
 with open('./data/driving_log.csv') as csvfile:
-	reader = scv.reader(csvfile)
+	reader = csv.reader(csvfile)
 	for line in reader:
 		lines.append(line)
 
 images = []
 measurements = []
-for line in lines:
+for line in lines[0:2]:
 	fullname = line[0]
 	filename = fullname.split('./')[-1]
 	current_path = './data/IMG/' + filename
@@ -23,6 +23,8 @@ for line in lines:
 
 X_train = np.array(images)
 y_train = np.array(measurements)
+print(np.shape(X_train))
+print(np.shape(y_train))
 
 from keras.models import Sequential
 from keras.layers import Flatten, Dense
