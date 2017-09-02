@@ -1,7 +1,8 @@
 import csv
 import keras
 import cv2
-import numpy as np 
+import numpy as np
+import os
 
 lines = []
 with open('./data/driving_log.csv') as csvfile:
@@ -11,13 +12,13 @@ with open('./data/driving_log.csv') as csvfile:
 
 images = []
 measurements = []
-for line in lines[0:2]:
+for line in lines:
 	fullname = line[0]
-	filename = fullname.split('./')[-1]
+	# as the image is from windows, use \\ as separator
+	filename = fullname.split('\\')[-1]
 	current_path = './data/IMG/' + filename
 	image = cv2.imread(current_path)
 	images.append(image)
-
 	measurement = float(line[3])
 	measurements.append(measurement)
 
