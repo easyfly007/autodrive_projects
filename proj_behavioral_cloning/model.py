@@ -7,11 +7,11 @@ from keras.layers import Flatten, Dense, Lambda, Cropping2D
 from keras.layers import Convolution2D, MaxPooling2D, Activation, Dropout
 from load_data import loadImages
 
-images1, measurements1 = loadImages('./data')
-# images2, measurements2 = loadImages('./data2')
+images1, measurements1 = loadImages('./data1')
+images2, measurements2 = loadImages('./data2')
 
-# images, measurements = images1 + images2, measurements1 + measurements2
-images, measurements = images1, measurements1
+images, measurements = images1 + images2, measurements1 + measurements2
+# images, measurements = images1, measurements1
 augmented_images, augmented_measurements = [], []
 for image, measurement in zip(images, measurements):
 	augmented_images.append(image)
@@ -56,5 +56,5 @@ model.add(Activation('relu'))
 model.add(Dense(1))
 
 model.compile(loss = 'mse', optimizer = 'adam')
-model.fit(X_train, y_train, validation_split = 0.2, shuffle = True, nb_epoch = 5)
-model.save('model_3.h5')
+model.fit(X_train, y_train, validation_split = 0.2, shuffle = True, nb_epoch = 1)
+model.save('model_5.h5')
