@@ -9,9 +9,9 @@ from load_data import loadImages
 
 images1, measurements1 = loadImages('./data1')
 images2, measurements2 = loadImages('./data2')
-# images3, measurements3 = loadImages('./data3')
+images3, measurements3 = loadImages('./data3')
 
-images, measurements = images1 + images2, measurements1 + measurements2
+images, measurements = images1 + images2 + images3, measurements1 + measurements2 + measurements3
 # images, measurements = images1, measurements1
 # images, measurements = images3, measurements3
 
@@ -64,4 +64,4 @@ model.add(Dense(1))
 
 model.compile(loss = 'mse', optimizer = 'adam')
 model.fit(X_train, y_train, validation_split = 0.2, shuffle = True, nb_epoch = 1)
-model.save('model_10.h5')
+model.save('model_01.h5')
