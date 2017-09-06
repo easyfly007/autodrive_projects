@@ -56,8 +56,8 @@ model.add(Flatten())
 model.add(Dense(100))
 model.add(Activation('relu'))
 
-model.add(Dense(50))
-model.add(Activation('relu'))
+# model.add(Dense(50))
+# model.add(Activation('relu'))
 
 
 model.add(Dense(1))
