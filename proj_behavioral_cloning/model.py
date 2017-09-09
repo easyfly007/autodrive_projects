@@ -30,19 +30,24 @@ model = Sequential()
 model.add(Lambda(lambda x:x/255.0 - 0.5, input_shape = (160, 320, 3)))
 model.add(Cropping2D(cropping = ((70, 25), (0, 0))))
 
-model.add(Conv2D(24, 5, strides = (2,2), border_mode = 'valid'))
+#model.add(Conv2D(24, 5, strides = (2,2), border_mode = 'valid'))
+model.add(Convolution2D(24, 5,5,subsample = (2,2), border_mode = 'valid'))
 model.add(Activation('relu'))
 
-model.add(Conv2D(36, 5, strides = (2,2), border_mode = 'valid'))
+#model.add(Conv2D(36, 5, strides = (2,2), border_mode = 'valid'))
+model.add(Convolution2D(36, 5,5, subsample =  (2,2), border_mode = 'valid'))
 model.add(Activation('relu'))
 
-model.add(Conv2D(48, 5, strides = (2,2), border_mode = 'valid'))
+#model.add(Conv2D(48, 5, strides = (2,2), border_mode = 'valid'))
+model.add(Convolution2D(48, 5, 5, subsample = (2,2), border_mode = 'valid'))
 model.add(Activation('relu'))
 
-model.add(Conv2D(64, 3, strides = (1,1), border_mode = 'valid'))
+#model.add(Conv2D(64, 3, strides = (1,1), border_mode = 'valid'))
+model.add(Convolution2D(64, 3,3, subsample = (1,1), border_mode = 'valid'))
 model.add(Activation('relu'))
 
-model.add(Conv2D(64, 3, strides = (1,1), border_mode = 'valid'))
+#model.add(Conv2D(64, 3, strides = (1,1), border_mode = 'valid'))
+model.add(Convolution2D(64, 3, 3, subsample = (1,1), border_mode = 'valid'))
 model.add(Activation('relu'))
 
 model.add(Flatten())
@@ -60,4 +65,4 @@ model.add(Dense(1))
 
 model.compile(loss = 'mse', optimizer = 'adam')
 model.fit(X_train, y_train, validation_split = 0.2, shuffle = True, nb_epoch = 5)
-model.save('model_3.h5')
+model.save('model_1.h5')
