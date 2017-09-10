@@ -169,7 +169,7 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 The final model architecture (model.py lines 29-64) consisted of a convolution neural network (see above sessions)
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
-![final model][image2]: ./nvidianet.png "final net structures "
+![final model](./nvidianet.png) "final net structures "
 
 
 #### 3. Creation of the Training Set & Training Process
