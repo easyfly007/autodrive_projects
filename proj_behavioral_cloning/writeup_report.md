@@ -185,21 +185,27 @@ I then recorded the vehicle recovering from the left side and right sides of the
 To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
 
 image from center camera, normal
+
 ![center camera image normal](./examples/center.jpg)
 
 image from center camera, horizontal flip
+
 ![center camera image flipped](./examples/center_flip.jpg)
 
 image from left camera, normal
+
 ![left camera image normal](./examples/left.jpg)
 
 image from left camera, flip
+
 ![left camera image flipped](./examples/left_flip.jpg)
 
 image from right camera, normal
+
 ![right camera image normal](./examples/right.jpg)
 
 image from right camera, flip
+
 ![right camera image flipped](./examples/right_flip.jpg)
 
 
