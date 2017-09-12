@@ -33,7 +33,7 @@ def loadImages(data_dir, islinux = True):
 		else:
 			filename = fullname.split('\\')[-1]
 		current_path = data_dir + '/IMG/' + filename
-		image = cv2.imread(current_path)
+		image = cv2.imread(current_path) # data in BGR order
 		images.append(image)
 
 		#right camera

@@ -64,5 +64,39 @@ model.add(Activation('relu'))
 model.add(Dense(1))
 
 model.compile(loss = 'mse', optimizer = 'adam')
+
+# not use a generator
 model.fit(X_train, y_train, validation_split = 0.2, shuffle = True, nb_epoch = 5)
+
+# # use a generator
+# def train_generator(samples, batch_size):
+# 	num_samples = len(samples)
+# 	while True: #endless loop, the stop condition is controlled in git_generator parameters
+# 		shuffle(samples)
+# 		for offset in range(0, num_samples, batch_size):
+# 			batch_samples = samples[offset: offset + batch_size]
+# 			images = []
+# 			labels = []
+# 			for batch_sample in batch_samples:
+# 				name = './IMG/' + batch_sample[0].split('/')[-1]
+#     center_image = cv2.imread(name)
+#     center_angle = float(batch_sample[3])
+            #     images.append(center_image)
+            #     angles.append(center_angle)
+
+            # # trim image to only see section with road
+            # X_train = np.array(images)
+            # y_train = np.array(angles)
+            # yield sklearn.utils.shuffle(X_train, y_train)
+
+# compile and train the model using the generator function
+train_generator = generator(train_samples, batch_size=32)
+validation_generator = generator(validation_samples, batch_size=32)
+
+
+
+# model.fit_generator(train_generator, samples_per_epoch= 
+# 	len(train_samples), validation_data=validation_generator, 
+# 	nb_val_samples=len(validation_samples), nb_epoch=3)
+
 model.save('model_1.h5')
