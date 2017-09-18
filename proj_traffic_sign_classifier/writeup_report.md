@@ -179,9 +179,9 @@ even though the larger epoch we select, the higher accuracy (lower loss value) w
 
 it's because in the large epoch iterations, it's learning the the pecific features from the training set, not the general features. so need to do an early stop here.
 
-in my testing, at the begining I use a large epoch, like 50 epoch, and then I find the validation accuracy stopped increasing after 15 .
-based on this, I use the final epoch number 15.
-
+in my testing, at the begining I use a large epoch, like 50 epoch, and then I watch at which epoch the validation accuracy will stop increase even decrease.
+finally I selected 30 as the epoch number.
+the validation accuracy is 0.945 and the test accuracy is 0.927.
 
 **learning rate**
 
