@@ -1,0 +1,7 @@
+1, speedlimit 30
+28, child crossing
+13, yield
+18, General caution
+15, No vehicles
+14, stop
+31, wild animal crossing
