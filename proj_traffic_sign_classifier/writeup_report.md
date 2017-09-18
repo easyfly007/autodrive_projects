@@ -267,7 +267,7 @@ then I use a more complicated network, as below:
 
 ----
 ### model evaluation on the new images
-to test the quality of this model, I just find 5 images from the web for a test.
+to test the quality of this model, I just find 7 images from the web for a test.
 to make it more difficulty, I use cell phone camera to take the photo on the PC screen and upload the image.
 
 ![training sample #1](./mysamples/001.jpg)
@@ -275,4 +275,7 @@ to make it more difficulty, I use cell phone camera to take the photo on the PC 
 ![training sample #3](./mysamples/003.jpg)
 ![training sample #4](./mysamples/004.jpg)
 ![training sample #5](./mysamples/005.jpg)
+![training sample #6](./mysamples/006.jpg)
+![training sample #7](./mysamples/007.jpg)
+
 ####1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
