@@ -174,15 +174,25 @@ this function will be used in the image lane finding and for videos.
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+#### 
+the pipe line for video is similar like what we handles for images.
+the only difference is we use a wrappere function process_image() and  VideoFileClip() will use it.
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](../project_solution.mp4)
 
 ---
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. The problems / issues during implementation
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+* I am not quite sure the image of the chess board and the vehicle image are taken from the same camera.
 
+* during the perspective transformation, the src and dst 4 points are critical, so I caefully selected them, and tried for several times.
+
+* for the 9 block separator in the image for pixel selection, some blocks may has zero pixels. in this condition, keep the block x-axis non-changed. maybe we should consider alightly change it based on the lower 2 level block positions.
+
+* in some special condition, such flow may fail to find the correct left or right lane lines, like in the challenge_video.mp4 and harder_challenge_video.mp4.
+
+in this condition, we may take advantage from the previous frames, e.g., we can suppose that each frame by time is somehow continuous.
+I think we can use the mean value of the previous lane line x-axis position and current lane line x-axis as current lane line position.
