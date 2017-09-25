@@ -1,1 +1,2 @@
-Please save your output images to this folder and include a description in your README of what each image shows.
+this file containd image that added the lane detaction from test_images
+for all the test*.jpg file, the original image is the same name under test_images dir
