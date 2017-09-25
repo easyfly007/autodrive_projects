@@ -36,7 +36,7 @@ The goals / steps of this project are the following:
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
 
-You're reading it!
+
 
 ### Camera Calibration
 
@@ -66,10 +66,10 @@ you can see the image as above session.
 to do a perspective transformation, firstly I select a typical img and carefully collect 2 points as a rectangle and do transformation for these points.
 
 the image I select is the stright_lines1.jpg, the source points and destination pointsI select are: 
-<pre><code>
-src = np.float32([[603, 444], [675, 444], [1050, 688], [253, 688]])
-dst = np.float32([[250, 0], [1050, 0], [1050, 700], [250, 700]])
-</code></pre>
+```python
+src = np.float32([[603, 444], [675, 444], [1050, 688],[253, 688]])
+dst = np.float32([[250, 0], [1050, 0], [1050, 700],[250, 700]])
+```
 
 ![straignt line img](./report_imgs/straignt_line.png)
 
@@ -101,21 +101,74 @@ I used a combination of color and gradient thresholds to generate a binary image
 ![image0](./report_imgs/bin_img.png)
 
 
-#### 4. Identified lane-line pixels and fit their positions with a polynomial?
+#### 4. Identified lane-line pixels and fit their positions with a polynomial
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
-![alt text][image5]
+* firstly I should decide which pixels should be considered for the lane-line fitting, as there's noise even with the color filter and sobel selection.
 
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+I do a histogram calculation by function `get_histogram()`. this function will give me indiate where the left/right lane line is at the x-axis.
+[histogram calculation](./report_imgs/histogram.png)
+
+the left/right peak value x-axis is 380 and 1100, is where the lane lines are.
+
+* secondly, I divided the image to 9 blocks on the y-axis, to find the pixels considered in each block from bottom to top.
+
+the box width margin is 100, and box height is img_height/9. only the pixels in the box take into fitting consideration.
+
+from bottom to up, box x-axis center position is adjusted by taking the mean value of the lower box. by this way, we can gradually update the box to make sure it contains the correct pixels, even the lane line is turning left or right.
+
+![img with blocks][report_imgs/img_blocks.png]
+
+* 3. lane line curve fitting
+
+based on the selected pixels, I do a curve fitting the get the predicted lane lines.
+
+this is done in the code function `LaneLineHandler.fitting()`
+![img with lane line curve fitting](report_imgs/laneline_fitting.png)
+
+
+#### 5. Calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+
+this is implemented in function
+ `LaneLineHandler.calcCurvature()` as the lane line is always intend to be straignt, I use ``x = f(y)`` rather than ``y = f(x).``
+the fitting curve is like:
+```python
+x = a*y^2 + b*y + c 
+R_curve = [1 + (2a+b)^2]^(3/2)/ |2a|
+```
+
+but this R_curve is from pixel units, we need to transfer into real word meter scale.
+I use the hard coded scale parameter herer:
+``` python
+ym_per_pix = 30/720 # meters per pixel in y dimension
+xm_per_pix = 3.7/700 # meters per pixel in x dimention
+```
 
 I did this in lines # through # in my code in `my_other_file.py`
 
-#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+#### 6. draw back the lane line colors to the raw image
+after the lane line detected, need to draw back to the raw input image.
+this function is implemented in code 
+```python
+class LaneLineHandler():
+    def drawBack():
+```
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+we need to do a inverse perspective transformation back from the detected lane line img to the raw image, and then color the road range as green.
 
-![alt text][image6]
+![draw back](report_imgs/drawback.png)
+
+#### 7 merge them together as a full flow
+
+to make the codes more compact, I use a class LaneLineHandlerer() to keep all the variables and internal images.
+the function
+```python
+class LaneLineHandler():
+    def run():
+```
+
+will consider all the flow and return the final drawback images.
+this function will be used in the image lane finding and for videos.
 
 ---
 
