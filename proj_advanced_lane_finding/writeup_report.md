@@ -3,7 +3,7 @@
 
 ---
 
-**Advanced Lane Finding Project**
+** Advanced Lane Finding Project**
 
 The goals / steps of this project are the following:
 
@@ -49,8 +49,7 @@ I start by preparing "object points", which will be the (x, y, z) coordinates of
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-![before un-distortion](./report_imgs/distortion_org.png)
-![after un-sidtortion](./report_imgs/distortion_fine.png)
+![distortion](./report_imgs/distortion_chessboard.png)
 
 
 ### Pipeline (single images)
@@ -97,20 +96,8 @@ I verified that my perspective transform was working as expected by drawing the 
 
 I used a combination of color and gradient thresholds to generate a binary image (see the python code  `build_binary_img()`).  Here's an example of my output for this step.
 
-![image0](./report_imgs/bin_img0.png)
-the raw image taken from the camera
+![image0](./report_imgs/bin_img.png)
 
-![image1](./report_imgs/bin_img0.png)
-the image after perspective transformation (from a front camera view to 'bird-eye' view)
-
-![image2](./report_imgs/bin_img0.png)
-gray scale image x axis sobel binary image
-
-![image3](./report_imgs/bin_img0.png)
-Saturation (S in HLS) channel filter image from the perspectived image
-
-![image4](./report_imgs/bin_img0.png)
-combination of S channel filter img and x-axis sobel image
 
 #### 4. Identified lane-line pixels and fit their positions with a polynomial?
 
