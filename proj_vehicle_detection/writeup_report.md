@@ -3,7 +3,7 @@
 
 ---
 
-**Vehicle Detection Project**
+** Vehicle Detection Project**
 
 The goals / steps of this project are the following:
 
@@ -57,7 +57,7 @@ Here is an example using the `Gray` color space and HOG parameters of `orientati
 
 
 
-####2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Explain how you settled on your final choice of HOG parameters.
 
 I tried various combinations of parameters, like the RGB, YCrCb, Gray
 finally I selected YCrCb and combine all the 3 channel together.
@@ -66,7 +66,7 @@ orient = 9, pix_per_cell = 8, cell_per_block = 2
 
 
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 in this case, I use svm as my classifier.
 
@@ -87,9 +87,9 @@ the classifier and scaler will be used for the video image processing,
 so I use pickle to save them to avoid retrain when I continue the project nexttime.
 
 
-###Sliding Window Search
+### Sliding Window Search
 
-####1.  implemented a sliding window search.
+#### 1.  implemented a sliding window search.
 
 the training image is small size and has only car (if label as positive)
 so I did a sliding window method to check if the car detected in each window.
@@ -108,7 +108,7 @@ scale = 2.5, y range = [400, 650]
 
 ![alt text][image3]
 
-####2. pipe line for image vehicle detection
+#### 2. pipe line for image vehicle detection
 
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
@@ -127,11 +127,11 @@ then this raw image with the final rectangle are saved in the output_images fold
 
 ### Video Implementation
 
-####1. final video output
+#### 1. final video output
 the final video result is test_solution.mp4 and test_solution2.mp4, which used different method.
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 firstly I used the same function like image_processing() to get the vehicle detection in the video, just treat the images for each frame
 individually.
@@ -146,7 +146,7 @@ you can compare test_slution.mp4 and test_solution2.mp4 and find the result.
 
 ---
 
-###Discussion
+### Discussion
 
 *  for speed up, I use the pickle to dump necessary information like the classifier and scaler that I will used next time.
 * also for speed up, as recommended by in the course, I firstly calculated the hog matrix then apply the windows sliding.
