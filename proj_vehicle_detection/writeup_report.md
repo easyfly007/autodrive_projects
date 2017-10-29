@@ -139,9 +139,19 @@ we can see the result is not very good.
 
 I used accumulated_heat_map to keep the previous frame detected card, and add the new frame heat map to do a final decision.
 
-* the accumulated_heat_map will be decayed with a factor of 0.6 for each frame, so the far away old frame image result will has lower affection.
+* the accumulated_heat_map will be decayed with a factor of 0.8 for each frame, so the far away old frame image result will has lower affection.
 by this result it's better than the first result
 you can compare test_slution.mp4 and test_solution2.mp4 and find the result.
+
+* the above method is implemented in function video_processing2
+
+* another way of continuous frame image handling methodd implemented in vidoe_processing3 function which is:
+
+use the previous 5 frame video image detection, and consider at least 4 frame marked as true pixels.
+we mark a car only in condition that the current frame is marked as true and the last 4 in 5 marked as true.
+
+the result is show in test_solution3.mp4
+
 
 ---
 
