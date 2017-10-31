@@ -134,7 +134,7 @@ also some intermedian image saved in the same folder, with a self-explainable pr
 ##### 1. final video output
 the final test video result is test_solution1.mp4, test_soltuin2.mp4, and test_solution3.mp4, which used different method (expained below).
 
-the final project video result is proj_solution3.mp4, which I used the third method to do vidoe frame image processing.
+the final project video result is proj_solution2.mp4 and proj_solution3.mp4, which I used the third method to do vidoe frame image processing.
 
 * the first method I used is in function video_processing1(), it's the same as img_processing(), process each frame iamge independently.
 we can see a lot of false positive detective result
